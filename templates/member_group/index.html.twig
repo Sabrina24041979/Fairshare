@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MemberGroup index{% endblock %}
+
+{% block body %}
+    <h1>MemberGroup index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date_enrolment</th>
+                <th>Role</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for member_group in member_groups %}
+            <tr>
+                <td>{{ member_group.id }}</td>
+                <td>{{ member_group.dateEnrolment ? member_group.dateEnrolment|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ member_group.role }}</td>
+                <td>
+                    <a href="{{ path('app_member_group_show', {'id': member_group.id}) }}">show</a>
+                    <a href="{{ path('app_member_group_edit', {'id': member_group.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_member_group_new') }}">Create new</a>
+{% endblock %}
